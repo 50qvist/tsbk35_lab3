@@ -18,11 +18,7 @@ YDct = bdct(Y, dctBlock);
 
 quantStepsize = 0.1;
 
-YQuant = bquant(YDct, quantStepsize);
-YBrec = brec(YQuant, quantStepsize);
-
-YInvQuant = ibdct(YBrec, dct_block, [imgSR imgSC]);
-
-imshow(YInvQuant)
+YQuant = bquant(YDct, quantStepsize)
+YInvQuant = ibdct(YDct)
 
 %Y_dct_inv = ibdct(Y_dct, dct_block, [imgS_R imgS_C]);
