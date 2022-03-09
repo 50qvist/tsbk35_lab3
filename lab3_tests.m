@@ -68,7 +68,10 @@ for k=1:size(YQuant, 1)
 end
 bits_per_pixel = bits/(imgSR*imgSC)
 
-bits = sum(jpgrate(YQuant, ))
+bits = sum(jpgrate(YQuant, dctBlock));
+bits_per_pixel_jpg = bits/(imgSR*imgSC)
+
+
 
 
 

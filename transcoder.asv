@@ -1,9 +1,6 @@
-function []=transcoder(im, transformMethod,quantMethod, sourceMethod, subsampleBool, blockSize, k1, k2)
+function []=transcoder(im, transformMethod,quantMethod, sourceMethod, subsampleBool, k1, k2)
 
-dctBlock = [blockSize blockSize];
-blockSize
-sqrt(blockSize)
-sqrtDctBlock = [sqrt(blockSize) sqrt(blockSize)]
+dctBlock = [8 8];
 
 qy = k1;
 qc = k2;
@@ -46,13 +43,8 @@ else
     bits = bits + huffman(p);  
 end                               
 
-tmp = brec(tmp, usedQuantizer); 
-
-if transformMethod == "dct"
-    imyr(:,:,1) = ibdct(tmp, dctBlock, [512 768]); 
-else
-    imyr(:,:,1) = ibdwht(imy(:,:,1), sqrtDctBlock, [512 768]);
-end
+tmp = brec(tmp, usedQuantizer);             
+imyr(:,:,1) = ibdct(tmp, dctBlock, [512 768]); 
 
 
 for c=2:3
@@ -98,7 +90,7 @@ for c=2:3
     if transformMethod == "dct"
         tmp = ibdct(tmp, dctBlock, [512 768]);
     else
-        tmp = ibdwht(tmp, sqrtDctBlock, size(tmp));
+        tmp = ibdwht(tmp, dctBlock);
     end
     
     imyr(:,:,c) = tmp;
